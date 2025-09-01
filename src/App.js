@@ -5,7 +5,7 @@ import ActiveUsers from "./components/ActiveUsers";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://collab-editor-backend-i2w7.onrender.com");
 
 function App() {
   const [username, setUsername] = useState("");
@@ -15,22 +15,22 @@ function App() {
 
   const login = async () => {
     if (!username) return;
-    await axios.post("http://localhost:5000/api/users/login", { username });
+    await axios.post("https://collab-editor-backend-i2w7.onrender.com/api/users/login", { username });
     setLoggedIn(true);
-    const res = await axios.get("http://localhost:5000/api/documents");
+    const res = await axios.get("https://collab-editor-backend-i2w7.onrender.com/api/documents");
     setDocuments(res.data);
   };
 
   const createDoc = async () => {
     const title = prompt("Enter document title:");
     if (title) {
-      const res = await axios.post("http://localhost:5000/api/documents", { title });
+      const res = await axios.post("https://collab-editor-backend-i2w7.onrender.com/api/documents", { title });
       setDocuments([res.data, ...documents]);
     }
   };
 
   const openDoc = async (docId) => {
-    const res = await axios.get(`http://localhost:5000/api/documents/${docId}`);
+    const res = await axios.get(`https://collab-editor-backend-i2w7.onrender.com/api/documents/${docId}`);
     setSelectedDoc(res.data);
 
     // 👉 join document only once here
